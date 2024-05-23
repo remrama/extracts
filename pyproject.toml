@@ -1,0 +1,58 @@
+[build-system]
+requires = ["setuptools>=61.0", "wheel"]
+build-backend = "setuptools.build_meta"
+
+[project]
+name = "extracts"
+description = "Load tables, figures, and text manually extracted from pubilshed journal articles."
+authors = [
+  {name = "Remington Mallett", email = "mallett.remy@gmail.com"},
+]
+maintainers = [
+  {name = "Remington Mallett", email = "mallett.remy@gmail.com"},
+]
+requires-python = ">=3.7"
+dependencies = [
+  "pandas>=2.0.0",
+  "pooch>=1.8.0",
+]
+readme = "README.rst"
+dynamic = ["version"]
+keywords = ["data", "meta-analysis"]
+classifiers = [
+  "Development Status :: 1 - Planning",
+  "License :: OSI Approved :: BSD License",
+  "Operating System :: OS Independent",
+  "Intended Audience :: Science/Research",
+  "Topic :: Scientific/Engineering",
+  "Programming Language :: Python",
+  "Programming Language :: Python :: 3",
+  "Programming Language :: Python :: 3.7",
+  "Programming Language :: Python :: 3.8",
+  "Programming Language :: Python :: 3.9",
+  "Programming Language :: Python :: 3.10",
+  "Programming Language :: Python :: 3.11",
+  "Programming Language :: Python :: 3.12",
+  "Programming Language :: Python :: 3.13",
+]
+
+[project.optional-dependencies]
+dev = [
+  "tabula-py>=2.9.0",
+]
+
+[project.urls]
+Homepage = "https://github.com/remrama/extracts"
+
+[tool.setuptools]
+include-package-data = true
+
+[tool.setuptools.packages.find]
+namespaces = false
+where = ["src"]
+
+[tool.setuptools.package-data]
+extracts = ["extracts/data/registry.txt"]
+
+[tool.setuptools.dynamic]
+version = {attr = "extracts.__version__"}
