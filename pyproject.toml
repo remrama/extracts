@@ -1,23 +1,23 @@
 [build-system]
-requires = ["setuptools>=61.0", "wheel"]
+requires = ["setuptools>=61.0", "wheel", "setuptools_scm>=8"]
 build-backend = "setuptools.build_meta"
 
 [project]
 name = "extracts"
-description = "Load tables, figures, and text manually extracted from pubilshed journal articles."
+dynamic = ["version"]
+description = "Load tables, figures, and text manually extracted from published journal articles."
 authors = [
   {name = "Remington Mallett", email = "mallett.remy@gmail.com"},
 ]
 maintainers = [
   {name = "Remington Mallett", email = "mallett.remy@gmail.com"},
 ]
-requires-python = ">=3.7"
+requires-python = ">=3.8"
 dependencies = [
-  "pandas>=2.0.0",
-  "pooch>=1.8.0",
+  "pandas>=2.0",
+  "pooch>=1.8",
 ]
 readme = "README.rst"
-dynamic = ["version"]
 keywords = ["data", "meta-analysis"]
 classifiers = [
   "Development Status :: 1 - Planning",
@@ -38,7 +38,7 @@ classifiers = [
 
 [project.optional-dependencies]
 dev = [
-  "tabula-py>=2.9.0",
+  "tabula-py>=2.9",
 ]
 
 [project.urls]
@@ -54,5 +54,7 @@ where = ["src"]
 [tool.setuptools.package-data]
 extracts = ["extracts/data/registry.txt"]
 
-[tool.setuptools.dynamic]
-version = {attr = "extracts.__version__"}
+[tool.setuptools_scm]
+version_scheme = "python-simplified-semver"
+local_scheme = "dirty-tag"
+version_file = "src/extracts/_version.py"

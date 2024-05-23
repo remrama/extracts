@@ -10,7 +10,7 @@ from pathlib import Path
 import pandas as pd
 import pooch
 
-from ._version import __version__
+from ._version import version
 
 
 
@@ -21,7 +21,7 @@ from ._version import __version__
 PUP = pooch.create(
     path=pooch.os_cache("extracts"),
     base_url="https://github.com/remrama/extracts/raw/{version}/src/extracts/data/",
-    version=__version__,
+    version=version,
     version_dev="main",
     registry=None,
 )
@@ -361,9 +361,12 @@ def fetch_zheng2023(table, *args, **kwargs):
 
 def fetch_raffaelli2021(table):
     # including SI
+    raise NotImplementedError
+
 
 def fetch_mair2021(table, *args, **kwargs):
     raise NotImplementedError
+
 
 def fetch_zuljevic(table, *args, **kwargs):
     raise NotImplementedError
