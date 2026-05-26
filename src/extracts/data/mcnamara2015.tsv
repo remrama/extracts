@@ -1,0 +1,50 @@
+Sample	Variable	Value	Extraction method	Relevant text
+Dreamboard (Nightmares)	Dictionary	LIWC2001	Reported	
+Dreamboard (Nightmares)	N texts	446	Reported	
+Dreamboard (Nightmares)	N authors	446	Reported	
+Dreamboard (Nightmares)	N authors (Female gender)	353	Reported	
+Dreamboard (Nightmares)	N authors (Male gender)	83	Reported	
+Dreamboard (Nightmares)	N authors (Unspecified gender)	13	Reported	
+Dreamboard (Nightmares)	Age (M)	34	Reported	
+Dreamboard (Nightmares)	Recruitment	None (App users)	Reported	
+Dreamboard (Nightmares)	Population	App users	Reported	
+Dreamboard (Nightmares)	Country	Mixed		
+Dreamboard (Nightmares)	Timeframe	2012		
+Dreamboard (Nightmares)	Probe	Nightmare		"Users tagged them as unpleasant and containing fear, and 3 experimenter raters rated them as nightmares. Both this and unpleasant also included fear I think."
+Dreamboard (Nightmares)	Response context	Online		
+Dreamboard (Nightmares)	Response format	App		
+Dreamboard (Nightmares)	Response medium	Typed		
+Dreamboard (Nightmares)	Response language (source)	English		
+Dreamboard (Nightmares)	Response language (target)	English		
+Dreamboard (Nightmares)	Response preprocessing	>=25 WC		
+Dreamboard (Unpleasant dreams)	Dictionary	LIWC2001		
+Dreamboard (Unpleasant dreams)	N texts	404		
+Dreamboard (Unpleasant dreams)	N authors	404		
+Dreamboard (Unpleasant dreams)	N authors (Female gender)	320		
+Dreamboard (Unpleasant dreams)	N authors (Male gender)	71		
+Dreamboard (Unpleasant dreams)	N authors (Unspecified gender)	13		
+Dreamboard (Unpleasant dreams)	Age (M)	34		
+Dreamboard (Unpleasant dreams)	Recruitment	None (App users)		
+Dreamboard (Unpleasant dreams)	Population	App users		
+Dreamboard (Unpleasant dreams)	Country	Mixed		
+Dreamboard (Unpleasant dreams)	Timeframe	2012		
+Dreamboard (Unpleasant dreams)	Probe	Unpleasant		"Users tagged them as unpleasant, and then experimenters checked to make sure they didn't mention nightmares or anything like that (waking up?)"
+Dreamboard (Unpleasant dreams)	Response context	Online		
+Dreamboard (Unpleasant dreams)	Response format	App		
+Dreamboard (Unpleasant dreams)	Response medium	Typed		
+Dreamboard (Unpleasant dreams)	Response language (source)	English		
+Dreamboard (Unpleasant dreams)	Response language (target)	English		
+Dreamboard (Unpleasant dreams)	Response preprocessing	>=25 WC		
+SurveyMonkey	Dictionary	LIWC2001		
+SurveyMonkey	N texts	135		
+SurveyMonkey	N authors	135		
+SurveyMonkey	Recruitment	Survey respondents who reported having >=1 NM per month.		
+SurveyMonkey	Population	NM sufferers		
+SurveyMonkey	Country	Mixed		
+SurveyMonkey	Probe	Nightmare?		n/r
+SurveyMonkey	Response context	Online		
+SurveyMonkey	Response format	Survey		
+SurveyMonkey	Response medium	Typed		
+SurveyMonkey	Response language (source)	English		
+SurveyMonkey	Response language (target)	English		
+SurveyMonkey	Response preprocessing	>=25 WC		

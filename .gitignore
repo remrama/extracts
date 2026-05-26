@@ -1,8 +1,11 @@
 __pycache__/
 build/
 dist/
-docs/
+docs/_build/
 *.egg-info/
 *.docx
 *.pdf
 manual.tsv
+TODO.md
+**/data/*/
+_version.py

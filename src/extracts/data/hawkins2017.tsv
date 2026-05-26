@@ -1,0 +1,56 @@
+Sample	Variable	Value	Extraction method	Relevant text
+Study 1 (Time 1)	Probe	Recent dream	Reported	"""wrote down a recent dream and another dream which they considered important from any time in their life"""
+Study 1 (Time 2)	Probe	Important dream	Reported	"""wrote down a recent dream and another dream which they considered important from any time in their life"""
+Study 1	Dictionary	LIWC2007	Reported	
+Study 1	N authors	731	Inferred	
+Study 1	N texts	731	Reported	"""the first author collected dream reports from 731 undergraduates"""
+Study 1	N authors (Male gender)	294	Reported	"""collected dream reports from 731 undergraduates (294 males, 336 females)"""
+Study 1	N authors (Female gender)	336	Reported	"""collected dream reports from 731 undergraduates (294 males, 336 females)"""
+Study 1	Age (M)	18.9	Reported	"""collected dream reports from 731 undergraduates […] with a mean age of 18.9 years (SD = 2.6)"""
+Study 1	Age (SD)	2.6	Reported	"""collected dream reports from 731 undergraduates […] with a mean age of 18.9 years (SD = 2.6)"""
+Study 1	Recruitment	Classroom	Inferred	
+Study 1	Population	Undergraduates	Reported	"""collected dream reports from 731 undergraduates […] from The University of Texas at Austin"""
+Study 1	Country	USA	Reported	"""collected dream reports from 731 undergraduates […] from The University of Texas at Austin"""
+Study 1	Timeframe	2007-2010	Reported	"""Between 2007 and 2010, the first author collected dream reports"""
+Study 1	Response context	Classroom	Inferred	
+Study 1	Response format	Survey	Reported	
+Study 1	Response medium	Handwritten	Reported	"""The students wrote down a recent dream"""
+Study 1	Response language (source)	English	Inferred	Sample is from US and used LIWC2007
+Study 1	Response language (target)	English	Inferred	Sample is from US and used LIWC2007
+Study 2	Dictionary	LIWC2007	Reported	
+Study 2	N authors	380	Reported	
+Study 2	N texts	380	Inferred	
+Study 2	N authors (Male gender)	190	Reported	
+Study 2	N authors (Female gender)	186	Reported	
+Study 2	N authors (Other or unspecified gender)	4	Reported	
+Study 2	Age (M)	34.23	Reported	
+Study 2	Age (SD)	12.24	Reported	
+Study 2	Age (Median)	30	Reported	
+Study 2	Recruitment	MTurkers	Reported	
+Study 2	Population	MTurkers	Reported	
+Study 2	Country	Mixed	Reported	
+Study 2	Timeframe	2013	Reported	
+Study 2	Probe	Recent dream	Reported	"""providing the text of a recent dream"""
+Study 2	Response context	Online	Reported	
+Study 2	Response format	Survey	Reported	
+Study 2	Response medium	Typed	Reported	
+Study 2	Response language (source)	English	Inferred	
+Study 2	Response language (target)	English	Inferred	
+Study 3	Dictionary	LIWC2007	Reported	
+Study 3	N authors	509	Reported	
+Study 3	N texts	509	Inferred	
+Study 3	N authors (Male gender)	199	Reported	
+Study 3	N authors (Female gender)	281	Reported	
+Study 3	N authors (Other or unspecified gender)	29	Reported	
+Study 3	Age (M)	19.32	Reported	
+Study 3	Age (SD)	3.75	Reported	
+Study 3	Recruitment	Classroom	Reported	
+Study 3	Population	Undergraduates (Intro Psych students)	Reported	
+Study 3	Country	USA	Reported	
+Study 3	Timeframe	2013	Reported	
+Study 3	Probe	Recent dream	Reported	"""recent dream reports"""
+Study 3	Response context	Classroom via TOWER	Reported	
+Study 3	Response format	Online	Reported	
+Study 3	Response medium	Typed	Reported	
+Study 3	Response language (source)	English	Reported	
+Study 3	Response language (target)	English	Reported	
