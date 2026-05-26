@@ -147,7 +147,13 @@ def _create_pup(dataset: str, version: str = "latest") -> pooch.Pooch:
 
 
 def list_available_datasets() -> list[str]:
-    """Return the sorted list of dataset names known to this package."""
+    """Return the sorted list of dataset names known to this package.
+
+    Examples
+    --------
+    >>> "barrett2020" in list_available_datasets()
+    True
+    """
     return sorted(DATASETS)
 
 

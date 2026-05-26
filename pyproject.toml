@@ -64,10 +64,11 @@ ignore_missing_imports = true
 strict = true
 
 [tool.pytest.ini_options]
-addopts = "--cov=extracts --cov-report=term-missing --doctest-modules -m 'not network'"
+addopts = "--cov=extracts --cov-report=term-missing --doctest-modules -m 'not network and not network_full'"
 testpaths = ["tests", "src"]
 markers = [
   "network: tests that hit the network (skipped by default; opt in with -m network).",
+  "network_full: exhaustive remote tests over every registered table (slow; opt in with -m network_full).",
 ]
 
 [tool.ruff]

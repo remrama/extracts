@@ -16,12 +16,12 @@ This package is being revived from a several-year-old prototype. A multi-step mo
 # Install in development mode
 uv pip install -e ".[dev]"
 
-# Run all tests with coverage
-uv run pytest tests/ --cov=extracts --cov-report=term-missing
+# Run local tests (network and network_full are skipped by default)
+uv run pytest
 
 # Run a single test file or test
-uv run pytest tests/test_fetchers.py
-uv run pytest tests/test_fetchers.py::test_name
+uv run pytest tests/test_processor.py
+uv run pytest tests/test_processor.py::test_first_call_parses_and_writes_parquet
 
 # Lint and format
 uv run ruff check src/ tests/
@@ -30,6 +30,12 @@ uv run ruff format src/ tests/
 # Type checking
 uv run mypy
 ```
+
+### Test markers
+
+- `uv run pytest` — local tests only (default; `network` and `network_full` skipped).
+- `uv run pytest -m network` — remote sample (~15 tests, one canonical table per dataset plus targeted regression tests). CI runs this on push to main.
+- `uv run pytest -m network_full` — exhaustive walk over every registered Zenodo table; slow, opt-in only.
 
 Always use `uv` when running Python scripts or installing dependencies. Never use bare `pip install` or `python`.
 
