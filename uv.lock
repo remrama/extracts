@@ -420,10 +420,10 @@ dev = [
 requires-dist = [
     { name = "mypy", marker = "extra == 'dev'", specifier = ">=1.12" },
     { name = "myst-nb", marker = "extra == 'dev'", specifier = ">=1.1" },
-    { name = "pandas", specifier = ">=2.2" },
+    { name = "pandas", specifier = ">=2.2.3" },
     { name = "pooch", specifier = ">=1.8" },
     { name = "pre-commit", marker = "extra == 'dev'", specifier = ">=3.0" },
-    { name = "pyarrow", specifier = ">=15.0" },
+    { name = "pyarrow", specifier = ">=19.0" },
     { name = "pytest", marker = "extra == 'dev'", specifier = ">=8.0" },
     { name = "pytest-cov", marker = "extra == 'dev'", specifier = ">=6.0" },
     { name = "ruff", marker = "extra == 'dev'", specifier = ">=0.6" },
