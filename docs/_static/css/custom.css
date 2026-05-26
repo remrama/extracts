@@ -1,0 +1,11 @@
+/* Keep DataFrame previews compact and scrollable. */
+.cell_output table {
+    display: block;
+    max-height: 360px;
+    overflow: auto;
+}
+
+.cell_output table th,
+.cell_output table td {
+    white-space: nowrap;
+}

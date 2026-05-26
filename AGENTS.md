@@ -8,7 +8,7 @@ This file provides guidance to AI coding agents (Claude Code, GitHub Copilot, et
 
 ## Status
 
-This package is being revived from a several-year-old prototype. A multi-step modernization is in progress — see [TODO.md](TODO.md) for the plan. Steps 1 (infrastructure) and 2 (code) are complete; tests, docs, and the `liwca.datasets.tables` port remain.
+This package is being revived from a several-year-old prototype. A multi-step modernization is in progress — see [TODO.md](TODO.md) for the plan. Steps 1 (infrastructure), 2 (code), 3 (tests), and 4 (docs) are complete; the `liwca.datasets.tables` port and final cleanup remain.
 
 ## Commands
 
@@ -36,6 +36,13 @@ uv run mypy
 - `uv run pytest` — local tests only (default; `network` and `network_full` skipped).
 - `uv run pytest -m network` — remote sample (~15 tests, one canonical table per dataset plus targeted regression tests). CI runs this on push to main.
 - `uv run pytest -m network_full` — exhaustive walk over every registered Zenodo table; slow, opt-in only.
+
+### Docs
+
+Docs are Sphinx + `myst-nb`; dataset pages execute code cells at build time so previews reflect the live Zenodo data.
+
+- `uv run sphinx-build -W -b html docs/ docs/_build/html` — full build (warnings are errors).
+- Cold builds hit Zenodo for every preview; subsequent builds reuse the Pooch cache plus `docs/.jupyter_cache/` for near-instant rebuilds.
 
 Always use `uv` when running Python scripts or installing dependencies. Never use bare `pip install` or `python`.
 

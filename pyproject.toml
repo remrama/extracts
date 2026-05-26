@@ -39,6 +39,7 @@ Documentation = "https://remrama.github.io/extracts"
 [project.optional-dependencies]
 dev = [
   "mypy>=1.12",
+  "myst-nb>=1.1",
   "pre-commit>=3.0",
   "pytest>=8.0",
   "pytest-cov>=6.0",
