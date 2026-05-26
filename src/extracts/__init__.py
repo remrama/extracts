@@ -1,2 +1,3 @@
+__version__ = "0.1.0.alpha.0"
+
 from ._fetchers import *
-from ._version import __version__

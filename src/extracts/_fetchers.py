@@ -12,8 +12,6 @@ import re
 import pandas as pd
 import pooch
 
-from ._version import __version__
-
 
 # "Latest" DOIs are "Concept" DOIs that always resolve to latest Zenodo version.
 DATASETS = {
@@ -96,44 +94,6 @@ def list_available_tables(dataset, version):
 ################################################################################
 # Fetching functions
 ################################################################################
-import functools
-
-def fetcher(func, dataset, table, version):
-    @functools.wraps(func)
-    def wrapper(table, version):
-        """
-        Wraps a functions
-
-        Params
-        ------
-        table : str
-            Desired table.
-        version : str
-            Desired version
-        """
-        dataset = func.__name__.split("_")[1]
-        print(dataset)
-        fp = _create_pup(dataset, version).fetch(f"{table}.tsv")
-        return fp
-        # processed = func(fp)
-        # return processed
-    return wrapper
-
-@fetcher("table1", "latest")
-def fetch_cariola2010(fp):
-    """
-    Grab cariola2010
-
-    Parameters
-    ----------
-    fp : str
-        Filepath
-
-    Returns
-    -------
-    df : dataframe
-    """
-    return pd.read_table(fp, index_col=0)
 
 
 def fetch_text(dataset, version=None, **kwargs):

@@ -1,5 +1,5 @@
 [build-system]
-requires = ["setuptools>=61.0", "wheel", "setuptools_scm>=8"]
+requires = ["setuptools>=80.0", "wheel"]
 build-backend = "setuptools.build_meta"
 
 [project]
@@ -12,32 +12,42 @@ authors = [
 maintainers = [
   {name = "Remington Mallett", email = "mallett.remy@gmail.com"},
 ]
-requires-python = ">=3.8"
+requires-python = ">=3.13"
 dependencies = [
-  "pandas>=2.0",
+  "pandas>=2.2",
   "pooch>=1.8",
 ]
-readme = "README.rst"
+readme = "README.md"
 keywords = ["data", "meta-analysis"]
 classifiers = [
-  "Development Status :: 1 - Planning",
+  "Development Status :: 3 - Alpha",
   "License :: OSI Approved :: BSD License",
   "Operating System :: OS Independent",
   "Intended Audience :: Science/Research",
   "Topic :: Scientific/Engineering",
   "Programming Language :: Python",
   "Programming Language :: Python :: 3",
-  "Programming Language :: Python :: 3.7",
-  "Programming Language :: Python :: 3.8",
-  "Programming Language :: Python :: 3.9",
-  "Programming Language :: Python :: 3.10",
-  "Programming Language :: Python :: 3.11",
-  "Programming Language :: Python :: 3.12",
   "Programming Language :: Python :: 3.13",
+  "Programming Language :: Python :: 3.14",
 ]
 
 [project.urls]
 Homepage = "https://github.com/remrama/extracts"
+Documentation = "https://remrama.github.io/extracts"
+
+[project.optional-dependencies]
+dev = [
+  "mypy>=1.12",
+  "pre-commit>=3.0",
+  "pytest>=8.0",
+  "pytest-cov>=6.0",
+  "ruff>=0.6",
+  "sphinx>=7.0",
+  "sphinx-book-theme>=1.1",
+]
+
+[tool.setuptools.dynamic]
+version = {attr = "extracts.__version__"}
 
 [tool.setuptools]
 include-package-data = true
@@ -47,9 +57,40 @@ namespaces = false
 where = ["src"]
 
 [tool.setuptools.package-data]
-extracts = ["extracts/data/registry.txt"]
+extracts = ["data/registry.txt"]
 
-[tool.setuptools_scm]
-version_scheme = "python-simplified-semver"
-local_scheme = "no-local-version"
-version_file = "src/extracts/_version.py"
+[tool.mypy]
+files = ["src/"]
+python_version = "3.13"
+ignore_missing_imports = true
+strict = true
+
+[tool.pytest.ini_options]
+addopts = "--cov=extracts --cov-report=term-missing --doctest-modules -m 'not network'"
+testpaths = ["tests", "src"]
+markers = [
+  "network: tests that hit the network (skipped by default; opt in with -m network).",
+]
+
+[tool.ruff]
+line-length = 100
+target-version = "py313"
+
+[tool.ruff.lint]
+select = ["E", "F", "I", "W", "C90", "UP", "NPY201"]
+
+[tool.ruff.lint.mccabe]
+max-complexity = 10
+
+[tool.ruff.lint.per-file-ignores]
+"__init__.py" = ["F401", "F403"]
+
+[tool.ruff.lint.pydocstyle]
+convention = "numpy"
+
+[tool.ruff.format]
+docstring-code-format = true
+docstring-code-line-length = 88
+indent-style = "space"
+line-ending = "lf"
+quote-style = "double"
