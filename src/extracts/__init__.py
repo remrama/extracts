@@ -1,3 +1,40 @@
 __version__ = "0.1.0.alpha.0"
 
-from ._fetchers import *
+from ._fetchers import (
+    fetch_barrett2020,
+    fetch_cariola2010,
+    fetch_cariola2014,
+    fetch_hawkins2017,
+    fetch_mariani2023,
+    fetch_mcnamara2015,
+    fetch_meador2022,
+    fetch_niederhoffer2017,
+    fetch_paquet2020,
+    fetch_path,
+    fetch_reference,
+    fetch_text,
+    get_location,
+    list_available_datasets,
+    list_available_tables,
+    set_location,
+)
+
+__all__ = [
+    "__version__",
+    "fetch_barrett2020",
+    "fetch_cariola2010",
+    "fetch_cariola2014",
+    "fetch_hawkins2017",
+    "fetch_mariani2023",
+    "fetch_mcnamara2015",
+    "fetch_meador2022",
+    "fetch_niederhoffer2017",
+    "fetch_paquet2020",
+    "fetch_path",
+    "fetch_reference",
+    "fetch_text",
+    "get_location",
+    "list_available_datasets",
+    "list_available_tables",
+    "set_location",
+]

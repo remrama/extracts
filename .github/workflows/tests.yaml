@@ -65,7 +65,7 @@ jobs:
             ~/.cache/extracts
             ~/Library/Caches/extracts
             ~\AppData\Local\extracts
-          key: pooch-${{ runner.os }}-${{ hashFiles('src/extracts/data/registry.txt') }}
+          key: pooch-${{ runner.os }}-${{ hashFiles('src/extracts/_fetchers.py') }}
           restore-keys: |
             pooch-${{ runner.os }}-
 
@@ -122,7 +122,7 @@ jobs:
             ~/.cache/extracts
             ~/Library/Caches/extracts
             ~\AppData\Local\extracts
-          key: pooch-${{ runner.os }}-${{ hashFiles('src/extracts/data/registry.txt') }}
+          key: pooch-${{ runner.os }}-${{ hashFiles('src/extracts/_fetchers.py') }}
           restore-keys: |
             pooch-${{ runner.os }}-
 

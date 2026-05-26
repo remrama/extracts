@@ -16,6 +16,7 @@ requires-python = ">=3.13"
 dependencies = [
   "pandas>=2.2",
   "pooch>=1.8",
+  "pyarrow>=15.0",
 ]
 readme = "README.md"
 keywords = ["data", "meta-analysis"]
@@ -55,9 +56,6 @@ include-package-data = true
 [tool.setuptools.packages.find]
 namespaces = false
 where = ["src"]
-
-[tool.setuptools.package-data]
-extracts = ["data/registry.txt"]
 
 [tool.mypy]
 files = ["src/"]

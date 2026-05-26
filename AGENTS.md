@@ -8,7 +8,7 @@ This file provides guidance to AI coding agents (Claude Code, GitHub Copilot, et
 
 ## Status
 
-This package is being revived from a several-year-old prototype. A multi-step modernization is in progress — see [TODO.md](TODO.md) for the plan. The current source in `_fetchers.py` is the legacy implementation and will be restructured in upcoming steps (new `_processor()` subfunctions per fetcher, a `fetch_path()` utility, environment-variable-driven cache location, etc.). Treat the current code as transitional.
+This package is being revived from a several-year-old prototype. A multi-step modernization is in progress — see [TODO.md](TODO.md) for the plan. Steps 1 (infrastructure) and 2 (code) are complete; tests, docs, and the `liwca.datasets.tables` port remain.
 
 ## Commands
 
@@ -35,19 +35,24 @@ Always use `uv` when running Python scripts or installing dependencies. Never us
 
 ## Architecture
 
-### Single source module (`src/extracts/`)
+### Single source module (`src/extracts/_fetchers.py`)
 
-- **`_fetchers.py`** — All per-dataset `fetch_*()` functions. Each builds a `pooch.Pooch` against a Zenodo DOI, downloads the requested table by name, and returns a parsed `pandas.DataFrame`. The `DATASETS` dict maps dataset names to a `{version: doi}` map; the special `"latest"` key resolves to the latest Zenodo Concept DOI.
+The whole public API lives in one module:
 
-  Public utilities (also re-exported from `extracts.__init__`):
-  - `list_available_datasets()` — sorted list of known dataset keys
-  - `list_available_tables(dataset, version)` — registry filenames for a given dataset/version
+- **Per-dataset fetchers** (`fetch_barrett2020`, `fetch_cariola2010`, etc.) — each builds a `pooch.Pooch` against a Zenodo DOI via the private `_create_pup(dataset, version)` helper, then routes through a local `_processor(source_path) -> pd.DataFrame` closure that defines that dataset's per-table parse logic (`index_col`, MultiIndex `header`, `skiprows`, etc.). Every fetcher takes `process: bool = True`:
+  - `process=True` (default): runs `_processor`, caches the result as parquet next to the raw download via the `CacheParquet` Pooch processor, and returns `pd.read_parquet(cache_path)`. Parquet round-trips MultiIndex columns and dtypes losslessly.
+  - `process=False`: skips the processor and returns `pd.read_table(raw_path, **kwargs)` so callers can supply their own read kwargs.
+- **`fetch_path(dataset, table, version=None)`** — returns the local `Path` of the downloaded raw file (filename takes `.tsv` if no extension is given).
+- **`fetch_text(dataset, ..., process=True)`** — returns the text contents of `text.json`, or its local path when `process=False`.
+- **`fetch_reference(dataset, ..., process=True)`** — returns a parsed BibTeX dict (`type`, `key`, `fields`), or the local path when `process=False`.
+- **`list_available_datasets()`** / **`list_available_tables(dataset, version=None)`** — discovery utilities.
+- **`get_location()`** / **`set_location(path)`** — read/override the cache root. `get_location` resolves `$EXTRACTS_DATA_DIR` if set, else falls back to `pooch.os_cache("extracts")`. `set_location` writes the env var for the current process.
 
-  Step 2 of the modernization will: remove the static `DATASETS` registry (everything lives in Zenodo now), strip the `10.5281/zenodo.` prefix and add it programmatically, push per-table parsing into `_processor()` subfunctions, and add a `process=True` switch so callers can opt out and load raw DataFrames.
+The `DATASETS` dict stores just the numeric Zenodo DOI suffix per version; `_create_pup` prepends the shared `DOI_PREFIX = "10.5281/zenodo."` programmatically.
 
 ### Datasets
 
-All remote data lives on Zenodo. The local cache defaults to `pooch.os_cache("extracts")` and (after Step 2 modernization) will be overridable via the `EXTRACTS_DATA_DIR` environment variable.
+All remote data lives on Zenodo. Each dataset gets its own subdirectory under `get_location()` (e.g. `~/.cache/extracts/barrett2020/`).
 
 ## Code Style
 
