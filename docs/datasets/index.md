@@ -3,11 +3,13 @@ file_format: mystnb
 kernelspec:
   name: python3
   display_name: Python 3
+mystnb:
+  execution_mode: force
 ---
 
 # Datasets
 
-Every dataset is hosted on [Zenodo](https://zenodo.org/) and accessed through a `fetch_<dataset>()` function. The table below summarizes what's currently available.
+Every dataset is hosted on [Zenodo](https://zenodo.org/) and accessed through a `fetch_<dataset>()` function. Per-paper datasets carry the author's surname + publication year (e.g. `barrett2020`); the `liwc<NNNN>_manual` entries are tables extracted from the LIWC Psychometrics Manual PDFs. The table below summarizes what's currently available.
 
 ```{code-cell} python
 :tags: [remove-input]
@@ -18,6 +20,7 @@ from IPython.display import HTML
 import extracts
 from extracts._fetchers import DATASETS, DOI_PREFIX
 
+# Build one row per dataset registered in extracts.DATASETS.
 rows = []
 for name in extracts.list_available_datasets():
     versions = DATASETS[name]
@@ -27,7 +30,7 @@ for name in extracts.list_available_datasets():
     rows.append(
         {
             "Dataset": f'<a href="{name}.html"><code>{name}</code></a>',
-            "Pinned versions": ", ".join(pinned),
+            "Pinned versions": ", ".join(pinned) or "—",
             "Latest DOI": f'<a href="https://doi.org/{doi}">{doi}</a>',
         }
     )
@@ -43,6 +46,11 @@ barrett2020
 cariola2010
 cariola2014
 hawkins2017
+liwc1999_manual
+liwc2001_manual
+liwc2007_manual
+liwc2015_manual
+liwc22_manual
 mariani2023
 mcnamara2015
 meador2022

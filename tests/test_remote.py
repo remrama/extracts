@@ -23,6 +23,11 @@ _CANONICAL = [
     ("cariola2010", "table1"),
     ("cariola2014", "table1"),
     ("hawkins2017", "table1"),
+    ("liwc1999_manual", "table1"),
+    ("liwc2001_manual", "table1"),
+    ("liwc2007_manual", "table1"),
+    ("liwc2015_manual", "table1"),
+    ("liwc22_manual", "table1"),
     ("mariani2023", "table1"),
     ("mcnamara2015", "table1"),
     ("meador2022", "table1"),
@@ -77,6 +82,29 @@ def test_niederhoffer2017_per_table_branches() -> None:
     # appendixB is read with header=None, so columns are a single-level integer index.
     assert apx_b.columns.nlevels == 1
     assert apx_b.columns.dtype.kind in ("i", "O")
+
+
+@pytest.mark.network
+def test_liwc22_manual_per_table_dispatch() -> None:
+    """fetch_liwc22_manual routes table1, table4, and tableA1 through distinct parsers."""
+    t1 = extracts.fetch_liwc22_manual("table1")
+    assert isinstance(t1, pd.DataFrame)
+    assert t1.index.name == "corpus"
+
+    t4 = extracts.fetch_liwc22_manual("table4")
+    assert isinstance(t4, pd.DataFrame)
+    assert set(t4.columns) == {
+        "liwc22_mean",
+        "liwc22_sd",
+        "liwc2015_mean",
+        "liwc2015_sd",
+        "r",
+    }
+
+    a1 = extracts.fetch_liwc22_manual("tableA1")
+    assert isinstance(a1, pd.DataFrame)
+    assert a1.index.name == "corpus"
+    assert "description" in a1.columns
 
 
 @pytest.mark.network

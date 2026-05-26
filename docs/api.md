@@ -41,3 +41,13 @@ The public API is intentionally small. For per-dataset usage examples, see the [
 .. autofunction:: fetch_niederhoffer2017
 .. autofunction:: fetch_paquet2020
 ```
+
+## LIWC Psychometrics Manual fetchers
+
+```{eval-rst}
+.. autofunction:: fetch_liwc1999_manual
+.. autofunction:: fetch_liwc2001_manual
+.. autofunction:: fetch_liwc2007_manual
+.. autofunction:: fetch_liwc2015_manual
+.. autofunction:: fetch_liwc22_manual
+```

@@ -3,6 +3,8 @@ file_format: mystnb
 kernelspec:
   name: python3
   display_name: Python 3
+mystnb:
+  execution_mode: force
 ---
 
 # Cache location

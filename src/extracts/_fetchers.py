@@ -36,6 +36,21 @@ DATASETS: dict[str, dict[str, str]] = {
         "v1": "11321094",
         "v2": "11356868",
     },
+    "liwc1999_manual": {
+        "latest": "11397664",
+    },
+    "liwc2001_manual": {
+        "latest": "11397687",
+    },
+    "liwc2007_manual": {
+        "latest": "11397699",
+    },
+    "liwc2015_manual": {
+        "latest": "11397709",
+    },
+    "liwc22_manual": {
+        "latest": "11397740",
+    },
     "mariani2023": {
         "latest": "11325393",
         "v1": "11325394",
@@ -553,6 +568,454 @@ def fetch_paquet2020(
 
     def _processor(source_path: Path) -> pd.DataFrame:
         return pd.read_table(source_path, index_col=0)
+
+    if process:
+        cache_path = pup.fetch(
+            f"{table}.tsv",
+            processor=CacheParquet(_processor, f"{table}.parquet"),
+        )
+        return pd.read_parquet(cache_path)
+    raw_path = pup.fetch(f"{table}.tsv")
+    return pd.read_table(raw_path, **kwargs)
+
+
+################################################################################
+# LIWC Psychometrics Manual fetchers
+################################################################################
+
+
+def fetch_liwc1999_manual(
+    table: str,
+    version: str | None = None,
+    process: bool = True,
+    **kwargs: Any,
+) -> pd.DataFrame:
+    """LIWC1999 Psychometrics Manual tables,
+    distributed on the `LIWC website psychometrics manuals page
+    <https://www.liwc.app/help/psychometrics-manuals>`_
+
+    Tables were extracted from the manual PDF and uploaded to Zenodo.
+
+    Table captions
+    --------------
+    * **table1** — LIWC1999 category descriptions (judges, examples, word counts).
+    * **table2** — Corpus summary statistics.
+    * **table3** — Per-category means and standard deviations.
+    """
+    pup = _create_pup("liwc1999_manual", version or "latest")
+
+    def _processor(source_path: Path) -> pd.DataFrame:
+        if table == "table1":
+            return (
+                pd.read_csv(source_path, sep="\t", dtype={"# Words": "Int8"})
+                .rename(
+                    columns={
+                        "Dimension": "name",
+                        "Abbrev": "category",
+                        "Examples": "examples",
+                        "# Words": "n_words",
+                        "Judge 1": "judge1",
+                        "Judge 2": "judge2",
+                    }
+                )
+                .assign(parent=lambda x: x["name"].where(x["category"].isna()).ffill())
+                .dropna(subset=["category"])
+                .set_index(["parent", "name"])
+            )
+        if table == "table2":
+            return (
+                pd.read_csv(source_path, sep="\t", header=1, index_col=0, thousands=",")
+                .drop(columns=["Totals"])
+                .T.rename_axis("corpus")
+                .rename(
+                    columns={
+                        "Number of files": "n_files",
+                        "Number of writers/speakers": "n_authors",
+                        "Number of words": "n_words",
+                        "Number of studies": "n_studies",
+                    }
+                )
+            )
+        if table == "table3":
+            return (
+                pd.read_csv(source_path, sep="\t")
+                .rename(columns={"Dimension": "name"})
+                .assign(parent=lambda x: x["name"].where(x["name"].str.isupper()).ffill())
+                .dropna()
+                .pipe(
+                    lambda x: x.assign(
+                        **x["Mean (sd)"]
+                        .str.extract(r"(?P<Mean>[\d.]+)\s*\((?P<SD>[\d.]+)\)")
+                        .astype(float)
+                    )
+                )
+                .drop(columns=["Mean (sd)"])
+                .set_index(["parent", "name"])
+            )
+        raise ValueError(f"Unknown table {table!r} for liwc1999_manual")
+
+    if process:
+        cache_path = pup.fetch(
+            f"{table}.tsv",
+            processor=CacheParquet(_processor, f"{table}.parquet"),
+        )
+        return pd.read_parquet(cache_path)
+    raw_path = pup.fetch(f"{table}.tsv")
+    return pd.read_table(raw_path, **kwargs)
+
+
+def fetch_liwc2001_manual(
+    table: str,
+    version: str | None = None,
+    process: bool = True,
+    **kwargs: Any,
+) -> pd.DataFrame:
+    """LIWC2001 Psychometrics Manual tables,
+    distributed on the `LIWC website psychometrics manuals page
+    <https://www.liwc.app/help/psychometrics-manuals>`_
+
+    Tables were extracted from the manual PDF and uploaded to Zenodo.
+    Content matches the LIWC1999 manual tables; deposit is kept separate so
+    each manual version has its own DOI.
+
+    Table captions
+    --------------
+    * **table1** — LIWC2001 category descriptions (judges, examples, word counts).
+    * **table2** — Corpus summary statistics.
+    * **table3** — Per-category means and standard deviations.
+    """
+    pup = _create_pup("liwc2001_manual", version or "latest")
+
+    def _processor(source_path: Path) -> pd.DataFrame:
+        if table == "table1":
+            return (
+                pd.read_csv(source_path, sep="\t", dtype={"# Words": "Int8"})
+                .rename(
+                    columns={
+                        "Dimension": "name",
+                        "Abbrev": "category",
+                        "Examples": "examples",
+                        "# Words": "n_words",
+                        "Judge 1": "judge1",
+                        "Judge 2": "judge2",
+                    }
+                )
+                .assign(parent=lambda x: x["name"].where(x["category"].isna()).ffill())
+                .dropna(subset=["category"])
+                .set_index(["parent", "name"])
+            )
+        if table == "table2":
+            return (
+                pd.read_csv(source_path, sep="\t", header=1, index_col=0, thousands=",")
+                .drop(columns=["Totals"])
+                .T.rename_axis("corpus")
+                .rename(
+                    columns={
+                        "Number of files": "n_files",
+                        "Number of writers/speakers": "n_authors",
+                        "Number of words": "n_words",
+                        "Number of studies": "n_studies",
+                    }
+                )
+            )
+        if table == "table3":
+            return (
+                pd.read_csv(source_path, sep="\t")
+                .rename(columns={"Dimension": "name"})
+                .assign(parent=lambda x: x["name"].where(x["name"].str.isupper()).ffill())
+                .dropna()
+                .pipe(
+                    lambda x: x.assign(
+                        **x["Mean (sd)"]
+                        .str.extract(r"(?P<Mean>[\d.]+)\s*\((?P<SD>[\d.]+)\)")
+                        .astype(float)
+                    )
+                )
+                .drop(columns=["Mean (sd)"])
+                .set_index(["parent", "name"])
+            )
+        raise ValueError(f"Unknown table {table!r} for liwc2001_manual")
+
+    if process:
+        cache_path = pup.fetch(
+            f"{table}.tsv",
+            processor=CacheParquet(_processor, f"{table}.parquet"),
+        )
+        return pd.read_parquet(cache_path)
+    raw_path = pup.fetch(f"{table}.tsv")
+    return pd.read_table(raw_path, **kwargs)
+
+
+def fetch_liwc2007_manual(
+    table: str,
+    version: str | None = None,
+    process: bool = True,
+    **kwargs: Any,
+) -> pd.DataFrame:
+    """LIWC2007 Psychometrics Manual tables,
+    distributed on the `LIWC website psychometrics manuals page
+    <https://www.liwc.app/help/psychometrics-manuals>`_
+
+    Tables were extracted from the manual PDF and uploaded to Zenodo.
+
+    Table captions
+    --------------
+    * **table1** — LIWC2007 category descriptions with alpha (binary/raw).
+    * **table2** — Corpus summary statistics.
+    * **table3** — Per-corpus means and standard deviations.
+    * **table4** — LIWC2007 vs LIWC2001 cross-version correlations.
+    """
+    pup = _create_pup("liwc2007_manual", version or "latest")
+
+    def _processor(source_path: Path) -> pd.DataFrame:
+        if table == "table1":
+            return (
+                pd.read_csv(source_path, sep="\t", dtype={"Words in category": "Int8"})
+                .assign(parent=lambda x: x["Category"].where(x["Abbrev"].isna()).ffill())
+                .dropna(subset=["Abbrev"])
+                .pipe(
+                    lambda x: x.assign(
+                        **x["Alpha: Binary/raw"]
+                        .str.extract(r"(?P<alpha_binary>[\d.]+)/(?P<alpha_raw>[\d.]+)")
+                        .astype(float)
+                    )
+                )
+                .drop(columns=["Alpha: Binary/raw"])
+                .rename(
+                    columns={
+                        "Category": "name",
+                        "Abbrev": "category",
+                        "Examples": "examples",
+                        "Word in category": "n_words",
+                        "Validity (judges)": "validity",
+                    }
+                )
+                .set_index(["parent", "category"])
+            )
+        if table == "table2":
+            return (
+                pd.read_csv(source_path, sep="\t", index_col=0, thousands=",")
+                .T.rename_axis("corpus")
+                .rename(columns=lambda x: x.replace("Total ", "n_"))
+            )
+        if table == "table3":
+            return (
+                pd.read_csv(source_path, sep="\t")
+                .assign(parent=lambda x: x["Category"].where(x["Novels"].isna()).ffill())
+                .dropna(subset=["Novels"])
+                .rename(columns={"Category": "category", "Grand Means": "Mean", "Mean SDs": "StD"})
+                .set_index(["parent", "category"])
+            )
+        if table == "table4":
+            return (
+                pd.read_csv(source_path, sep="\t", header=[0, 1], index_col=0)
+                .rename_axis("name")
+                .set_axis(
+                    ["liwc2007_mean", "liwc2007_sd", "liwc2001_mean", "liwc2001_sd", "r"],
+                    axis=1,
+                )
+            )
+        raise ValueError(f"Unknown table {table!r} for liwc2007_manual")
+
+    if process:
+        cache_path = pup.fetch(
+            f"{table}.tsv",
+            processor=CacheParquet(_processor, f"{table}.parquet"),
+        )
+        return pd.read_parquet(cache_path)
+    raw_path = pup.fetch(f"{table}.tsv")
+    return pd.read_table(raw_path, **kwargs)
+
+
+def fetch_liwc2015_manual(
+    table: str,
+    version: str | None = None,
+    process: bool = True,
+    **kwargs: Any,
+) -> pd.DataFrame:
+    """LIWC2015 Psychometrics Manual tables,
+    distributed on the `LIWC website psychometrics manuals page
+    <https://www.liwc.app/help/psychometrics-manuals>`_
+
+    Tables were extracted from the manual PDF and uploaded to Zenodo.
+
+    Table captions
+    --------------
+    * **table1** — LIWC2015 category descriptions with internal consistency.
+    * **table2** — Corpus summary statistics.
+    * **table3** — Per-corpus means and standard deviations.
+    * **table4** — LIWC2015 vs LIWC2007 cross-version correlations.
+    """
+    pup = _create_pup("liwc2015_manual", version or "latest")
+
+    def _processor(source_path: Path) -> pd.DataFrame:
+        if table == "table1":
+            return (
+                pd.read_csv(source_path, sep="\t", na_values="-")
+                .assign(
+                    parent=lambda x: (
+                        x["Category"].where(x["Abbrev"].isna()).ffill().fillna(x["Abbrev"])
+                    )
+                )
+                .dropna(subset=["Abbrev"])
+                .rename(
+                    columns={
+                        "Category": "name",
+                        "Abbrev": "category",
+                        "Example": "examples",
+                        "Words in category": "n_words",
+                        "Internal Consistency (Uncorrected alpha)": "alpha_uncorrected",
+                        "Internal Consistency (Corrected alpha)": "alpha_corrected",
+                    }
+                )
+                .set_index(["parent", "category"])
+            )
+        if table == "table2":
+            return (
+                pd.read_csv(source_path, sep="\t", index_col=0, thousands=",", na_values="Unknown")
+                .astype("Int32")
+                .T.rename_axis("corpus")
+                .rename(columns=lambda x: x.replace("Total ", "n_"))
+            )
+        if table == "table3":
+            return (
+                pd.read_csv(source_path, sep="\t")
+                .assign(parent=lambda x: x["Category"].where(x["Novels"].isna()).ffill())
+                .dropna(subset=["Novels"])
+                .rename(columns={"Category": "category", "Grand Means": "Mean", "Mean SDs": "StD"})
+                .set_index(["parent", "category"])
+            )
+        if table == "table4":
+            return (
+                pd.read_csv(source_path, sep="\t", thousands=",", na_values=["-"])
+                .assign(
+                    parent=lambda x: (
+                        x["LIWC Dimension"]
+                        .where(x["Output Label"].isna())
+                        .ffill()
+                        .fillna(x["Output Label"])
+                    )
+                )
+                .dropna(subset=["Output Label"])
+                .rename(
+                    columns={
+                        "LIWC Dimension": "name",
+                        "Output Label": "category",
+                        "LIWC2015 mean": "liwc2015_mean",
+                        "LIWC2007 mean": "liwc2007_mean",
+                        "LIWC 2015/2007 Correlation": "r",
+                    }
+                )
+                .set_index(["parent", "category"])
+            )
+        raise ValueError(f"Unknown table {table!r} for liwc2015_manual")
+
+    if process:
+        cache_path = pup.fetch(
+            f"{table}.tsv",
+            processor=CacheParquet(_processor, f"{table}.parquet"),
+        )
+        return pd.read_parquet(cache_path)
+    raw_path = pup.fetch(f"{table}.tsv")
+    return pd.read_table(raw_path, **kwargs)
+
+
+def fetch_liwc22_manual(
+    table: str,
+    version: str | None = None,
+    process: bool = True,
+    **kwargs: Any,
+) -> pd.DataFrame:
+    """LIWC-22 Psychometrics Manual tables,
+    distributed on the `LIWC website psychometrics manuals page
+    <https://www.liwc.app/help/psychometrics-manuals>`_
+
+    Tables were extracted from the manual PDF and uploaded to Zenodo.
+
+    Table captions
+    --------------
+    * **table1** — Corpus word-count summary.
+    * **table2** — Internal consistency per category.
+    * **table3** — Per-corpus means and SDs (MultiIndex columns).
+    * **table4** — LIWC-22 vs LIWC2015 cross-version correlations.
+    * **tableA1** — Test-kitchen corpus appendix.
+    """
+    pup = _create_pup("liwc22_manual", version or "latest")
+
+    def _processor(source_path: Path) -> pd.DataFrame:
+        if table == "table1":
+            return (
+                pd.read_csv(source_path, sep="\t")
+                .replace({"Corpus": {"Overall mean": "Total"}})
+                .pipe(
+                    lambda x: x.assign(
+                        **x["Word Count M (SD)"]
+                        .str.extract(r"(?P<n_words_mean>\d+) \((?P<n_words_sd>\d+)\)")
+                        .astype(int)
+                    )
+                )
+                .drop(columns=["Word Count M (SD)"])
+                .rename(columns={"Corpus": "corpus", "Description": "description"})
+                .set_index("corpus")
+                .reindex(columns=["n_words_mean", "n_words_sd", "description"])
+            )
+        if table == "table2":
+            return (
+                pd.read_csv(source_path, sep="\t", na_values=["-"])
+                .assign(
+                    parent=lambda x: (
+                        x["Category"].where(x["Abbrev."].isna()).ffill().fillna(x["Abbrev."])
+                    )
+                )
+                .dropna(subset=["Abbrev."])
+                .rename(
+                    columns={
+                        "Category": "name",
+                        "Abbrev.": "category",
+                        "Description/Most frequently used exemplars": "examples",
+                        "Words/Entries in category": "n_words",
+                        "Internal Consistency: Cronbach's alpha": "alpha",
+                        "Internal Consistency: KR-20": "kr20",
+                    }
+                )
+                .set_index(["parent", "category"])
+            )
+        if table == "table3":
+            _df = (
+                pd.read_csv(source_path, sep="\t", skiprows=[1, 2], na_values=["mean", "SD"])
+                .assign(parent=lambda x: x["Category"].where(x["Twitter"].isna()).ffill())
+                .dropna(subset=["Twitter"])
+                .rename(columns={"Category": "name"})
+                .set_index(["parent", "name"])
+            )
+            columns = pd.Series(_df.columns).replace(r"^Unnamed: \d+", pd.NA, regex=True).ffill()
+            _df.columns = pd.MultiIndex.from_product(
+                (columns.unique(), ["mean", "sd"]), names=("corpus", "statistic")
+            )
+            return _df
+        if table == "table4":
+            return pd.read_csv(
+                source_path,
+                sep="\t",
+                skiprows=3,
+                names=["liwc22_mean", "liwc22_sd", "liwc2015_mean", "liwc2015_sd", "r"],
+            )
+        if table == "tableA1":
+            return (
+                pd.read_csv(source_path, sep="\t", thousands=",")
+                .rename(
+                    columns={
+                        "Corpus": "corpus",
+                        "Description": "description",
+                        "Test Kitchen N": "n_files",
+                        "Years Written": "timeframe",
+                        "Population N": "n_authors",
+                    }
+                )
+                .set_index("corpus")
+                .reindex(columns=["n_files", "n_authors", "timeframe", "description"])
+            )
+        raise ValueError(f"Unknown table {table!r} for liwc22_manual")
 
     if process:
         cache_path = pup.fetch(
