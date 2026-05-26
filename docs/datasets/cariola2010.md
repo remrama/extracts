@@ -7,12 +7,16 @@ kernelspec:
 
 # cariola2010
 
-Cariola, 2010, *unpublished paper*, Assessing the latent linguistic structure of oral dream narratives,
-[Edinburgh Research Explorer](https://www.research.ed.ac.uk/en/publications/assessing-the-latent-linguistic-structure-of-oral-dream-narrative)
+Cariola, 2010, *unpublished paper*
+Assessing the latent linguistic structure of oral dream narratives
+url: <https://www.research.ed.ac.uk/en/publications/assessing-the-latent-linguistic-structure-of-oral-dream-narrative>
+
+Zenodo deposit: [10.5281/zenodo.11301890](https://doi.org/10.5281/zenodo.11301890)
 
 ## Available tables
 
-* **table1** — Descriptive statistics of linguistic variables in orally elicited dream narratives.
+* **table1** — Descriptive statistics of linguistic variables in orally elicited
+  dream narratives.
 
 ## Preview
 
@@ -30,7 +34,7 @@ df.shape
 ## Versions
 
 ```{code-cell} python
-from extracts._fetchers import DATASETS
+from extracts._common import DATASETS
 
 DATASETS["cariola2010"]
 ```

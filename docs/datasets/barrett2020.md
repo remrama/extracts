@@ -7,12 +7,16 @@ kernelspec:
 
 # barrett2020
 
-Barrett, 2020, *Dreaming*, Dreams about COVID-19 versus normative dreams: Trends by gender,
-[doi:10.1037/drm0000149](https://doi.org/10.1037/drm0000149)
+Barrett, 2020, *Dreaming*
+Dreams about COVID-19 versus normative dreams: Trends by gender
+doi: [10.1037/drm0000149](https://doi.org/10.1037/drm0000149)
+
+Zenodo deposit: [10.5281/zenodo.11300322](https://doi.org/10.5281/zenodo.11300322)
 
 ## Available tables
 
-* **table1** — Female Pandemic Survey Dreams Versus Hall and Van de Castle Female Normative Dreams.
+* **table1** — Female Pandemic Survey Dreams Versus Hall and Van de Castle Female
+  Normative Dreams.
 * **table2** — Male Pandemic Survey Dreams Versus Hall and Van de Castle Male Normative Dreams.
 
 ## Preview
@@ -31,11 +35,12 @@ df.shape
 ## Versions
 
 ```{code-cell} python
-from extracts._fetchers import DATASETS
+from extracts._common import DATASETS
 
 DATASETS["barrett2020"]
 ```
 
 ## Notes
 
-Table 2 has "male" in the column names, but Table 1 does not have "female" in the same respective location. Table 1 is female-only values.
+Table 2 has "male" in the column names, but Table 1 does not have "female"
+in the same respective location. Note that Table 1 is female-only values.

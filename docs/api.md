@@ -45,9 +45,9 @@ The public API is intentionally small. For per-dataset usage examples, see the [
 ## LIWC Psychometrics Manual fetchers
 
 ```{eval-rst}
-.. autofunction:: fetch_liwc1999_manual
-.. autofunction:: fetch_liwc2001_manual
-.. autofunction:: fetch_liwc2007_manual
-.. autofunction:: fetch_liwc2015_manual
-.. autofunction:: fetch_liwc22_manual
+.. autofunction:: fetch_liwc1999
+.. autofunction:: fetch_liwc2001
+.. autofunction:: fetch_liwc2007
+.. autofunction:: fetch_liwc2015
+.. autofunction:: fetch_liwc22
 ```

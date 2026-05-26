@@ -7,8 +7,11 @@ kernelspec:
 
 # mariani2023
 
-Mariani et al., 2023, *Psychoanal Psychol*, Referential processes in dreams: A brief report from a COVID-19 dreams analysis,
-[doi:10.1037/pap0000420](https://doi.org/10.1037/pap0000420)
+Mariani et al., 2023, *Psychoanal Psychol*
+Referential processes in dreams: A brief report from a COVID-19 dreams analysis
+doi: [10.1037/pap0000420](https://doi.org/10.1037/pap0000420)
+
+Zenodo deposit: [10.5281/zenodo.11325393](https://doi.org/10.5281/zenodo.11325393)
 
 ## Available tables
 
@@ -30,7 +33,7 @@ df.shape
 ## Versions
 
 ```{code-cell} python
-from extracts._fetchers import DATASETS
+from extracts._common import DATASETS
 
 DATASETS["mariani2023"]
 ```

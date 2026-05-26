@@ -7,8 +7,12 @@ kernelspec:
 
 # paquet2020
 
-Paquet et al., 2020, *Dreaming*, A quantitative text analysis approach to describing posttrauma nightmares in a treatment-seeking population,
-[doi:10.1037/drm0000128](https://doi.org/10.1037/drm0000128)
+Paquet et al., 2020, *Dreaming*
+A quantitative text analysis approach to describing posttrauma nightmares in a
+treatment-seeking population
+doi: [10.1037/drm0000128](https://doi.org/10.1037/drm0000128)
+
+Zenodo deposit: [10.5281/zenodo.11324388](https://doi.org/10.5281/zenodo.11324388)
 
 ## Available tables
 
@@ -32,7 +36,7 @@ df.shape
 ## Versions
 
 ```{code-cell} python
-from extracts._fetchers import DATASETS
+from extracts._common import DATASETS
 
 DATASETS["paquet2020"]
 ```

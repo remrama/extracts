@@ -7,12 +7,17 @@ kernelspec:
 
 # hawkins2017
 
-Hawkins II & Boyd, 2017, *Dreaming*, Such stuff as dreams are made on: Dream language, LIWC norms, and personality correlates,
-[doi:10.1037/drm0000049](https://doi.org/10.1037/drm0000049)
+Hawkins II & Boyd, 2017, *Dreaming*
+Such stuff as dreams are made on: Dream language, LIWC norms, and personality correlates
+Dreams about COVID-19 versus normative dreams: Trends by gender
+doi: [10.1037/drm0000049](https://doi.org/10.1037/drm0000049)
+
+Zenodo deposit: [10.5281/zenodo.11321093](https://doi.org/10.5281/zenodo.11321093)
 
 ## Available tables
 
-* **table1** — Means and Standard Deviations (SDs) for the LIWC (2007) Linguistic Features of Dreams From Studies 1 to 3.
+* **table1** — Means and Standard Deviations (SDs) for the LIWC (2007) Linguistic Features
+  of Dreams From Studies 1 to 3.
 
 ## Preview
 
@@ -24,13 +29,13 @@ df.head()
 ```
 
 ```{code-cell} python
-df.shape, df.columns.nlevels
+df.shape
 ```
 
 ## Versions
 
 ```{code-cell} python
-from extracts._fetchers import DATASETS
+from extracts._common import DATASETS
 
 DATASETS["hawkins2017"]
 ```

@@ -7,10 +7,13 @@ kernelspec:
 
 # niederhoffer2017
 
-Niederhoffer et al., 2017, *CLPsych*, In your wildest dreams: the language and psychological features of dreams,
-[doi:10.18653/v1/W17-3102](https://doi.org/10.18653/v1/W17-3102)
+Niederhoffer et al., 2017, *CLPsych*
+In your wildest dreams: the language and psychological features of dreams
+doi: [10.18653/v1/W17-3102](https://doi.org/10.18653/v1/W17-3102)
 
-PDF available at [aclanthology.org/W17-3102.pdf](https://aclanthology.org/W17-3102.pdf).
+PDF available at https://aclanthology.org/W17-3102.pdf.
+
+Zenodo deposit: [10.5281/zenodo.11293797](https://doi.org/10.5281/zenodo.11293797)
 
 ## Available tables
 
@@ -30,17 +33,18 @@ df.head()
 ```
 
 ```{code-cell} python
-df.shape, df.columns.nlevels
+df.shape
 ```
 
 ## Versions
 
 ```{code-cell} python
-from extracts._fetchers import DATASETS
+from extracts._common import DATASETS
 
 DATASETS["niederhoffer2017"]
 ```
 
 ## Notes
 
-A typo in Table 2 was corrected upstream (`plave` → `plane`). The correct spelling is "plane", as confirmed by the corresponding topic in Appendix A.
+I corrected a typo in Table 2 (``plave`` -> ``plane``).
+The correct spelling is "plane", as you can see it in the corresponding Topic in Appendix A.

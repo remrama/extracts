@@ -46,11 +46,11 @@ barrett2020
 cariola2010
 cariola2014
 hawkins2017
-liwc1999_manual
-liwc2001_manual
-liwc2007_manual
-liwc2015_manual
-liwc22_manual
+liwc1999
+liwc2001
+liwc2007
+liwc2015
+liwc22
 mariani2023
 mcnamara2015
 meador2022

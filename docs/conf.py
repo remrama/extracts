@@ -77,10 +77,6 @@ html_theme_options = {
     "toc_title": "On this page",
     "pygments_light_style": "github-light-colorblind",
     "pygments_dark_style": "github-dark-colorblind",
-    "announcement": (
-        "⚠️ This package is under active development."
-        " Features are untested and may change without notice. ⚠️"
-    ),
 }
 
 templates_path = ["_templates"]

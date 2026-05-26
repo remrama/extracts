@@ -7,8 +7,12 @@ kernelspec:
 
 # meador2022
 
-Meador et al., 2022, *Appl Cognit Psychol*, Lexical tendencies of high and low barrier personalities in narratives of everyday and dream memories,
-[doi:10.1002/acp.3976](https://doi.org/10.1002/acp.3976)
+Meador et al., 2022, *Appl Cognit Psychol*
+Lexical tendencies of high and low barrier personalities in narratives of everyday and
+dream memories
+doi: [10.1002/acp.3976](https://doi.org/10.1002/acp.3976)
+
+Zenodo deposit: [10.5281/zenodo.11300860](https://doi.org/10.5281/zenodo.11300860)
 
 ## Available tables
 
@@ -30,7 +34,7 @@ df.shape
 ## Versions
 
 ```{code-cell} python
-from extracts._fetchers import DATASETS
+from extracts._common import DATASETS
 
 DATASETS["meador2022"]
 ```

@@ -7,13 +7,17 @@ kernelspec:
 
 # mcnamara2015
 
-McNamara et al., 2015, *Dreaming*, Aggression in nightmares and unpleasant dreams and in people reporting recurrent nightmares,
-[doi:10.1037/a0039273](https://doi.org/10.1037/a0039273)
+McNamara et al., 2015, *Dreaming*
+Aggression in nightmares and unpleasant dreams and in people reporting recurrent nightmares
+doi: [10.1037/a0039273](https://doi.org/10.1037/a0039273)
+
+Zenodo deposit: [10.5281/zenodo.11321666](https://doi.org/10.5281/zenodo.11321666)
 
 ## Available tables
 
 * **table1** — LIWC and Content Scale Means and SDs Across All Types of Dreams With LIWC Norms.
-* **table6** — Categorical Comparisons Between Nightmares That Woke A Dreamer Up to Nightmares Where the Dreamer Was Not Woken Up.
+* **table6** — Categorical Comparisons Between Nightmares That Woke A Dreamer Up to
+  Nightmares Where the Dreamer Was Not Woken Up.
 
 ## Preview
 
@@ -31,7 +35,7 @@ df.shape
 ## Versions
 
 ```{code-cell} python
-from extracts._fetchers import DATASETS
+from extracts._common import DATASETS
 
 DATASETS["mcnamara2015"]
 ```

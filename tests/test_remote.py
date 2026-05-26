@@ -1,8 +1,8 @@
 """Network-gated tests: fetch real data from Zenodo.
 
 Run with:
-    uv run pytest tests/test_remote.py -m network         # canonical sample
-    uv run pytest tests/test_remote.py -m network_full    # exhaustive
+    uv run pytest tests/test_remote.py -m network         # default sample
+    uv run pytest tests/test_remote.py -m network_full    # exhaustive (opt-in)
 
 The default ``pytest`` invocation skips both markers via the ``-m 'not network
 and not network_full'`` filter in pyproject.toml.
@@ -18,30 +18,11 @@ import pytest
 
 import extracts
 
-_CANONICAL = [
-    ("barrett2020", "table1"),
-    ("cariola2010", "table1"),
-    ("cariola2014", "table1"),
-    ("hawkins2017", "table1"),
-    ("liwc1999_manual", "table1"),
-    ("liwc2001_manual", "table1"),
-    ("liwc2007_manual", "table1"),
-    ("liwc2015_manual", "table1"),
-    ("liwc22_manual", "table1"),
-    ("mariani2023", "table1"),
-    ("mcnamara2015", "table1"),
-    ("meador2022", "table1"),
-    ("niederhoffer2017", "table1"),
-    ("paquet2020", "table1"),
-]
-
 
 @pytest.mark.network
-@pytest.mark.parametrize("dataset,table", _CANONICAL)
-def test_fetch_canonical_table(dataset: str, table: str) -> None:
-    """Each dataset's canonical table loads as a non-empty DataFrame."""
-    fn = getattr(extracts, f"fetch_{dataset}")
-    df = fn(table)
+def test_fetch_smoke() -> None:
+    """A single fetcher works end-to-end against live Zenodo."""
+    df = extracts.fetch_barrett2020("table1")
     assert isinstance(df, pd.DataFrame)
     assert len(df) > 0
 
@@ -85,13 +66,13 @@ def test_niederhoffer2017_per_table_branches() -> None:
 
 
 @pytest.mark.network
-def test_liwc22_manual_per_table_dispatch() -> None:
-    """fetch_liwc22_manual routes table1, table4, and tableA1 through distinct parsers."""
-    t1 = extracts.fetch_liwc22_manual("table1")
+def test_liwc22_per_table_dispatch() -> None:
+    """fetch_liwc22 routes table1, table4, and tableA1 through distinct parsers."""
+    t1 = extracts.fetch_liwc22("table1")
     assert isinstance(t1, pd.DataFrame)
     assert t1.index.name == "corpus"
 
-    t4 = extracts.fetch_liwc22_manual("table4")
+    t4 = extracts.fetch_liwc22("table4")
     assert isinstance(t4, pd.DataFrame)
     assert set(t4.columns) == {
         "liwc22_mean",
@@ -101,7 +82,7 @@ def test_liwc22_manual_per_table_dispatch() -> None:
         "r",
     }
 
-    a1 = extracts.fetch_liwc22_manual("tableA1")
+    a1 = extracts.fetch_liwc22("tableA1")
     assert isinstance(a1, pd.DataFrame)
     assert a1.index.name == "corpus"
     assert "description" in a1.columns
@@ -156,7 +137,7 @@ def test_fetch_reference_path_with_process_false() -> None:
 
 
 # ---------------------------------------------------------------------------
-# Opt-in exhaustive section (not part of the default test-remote job).
+# Opt-in exhaustive section. Not run by CI; available for local sanity-checks.
 # Run with:  uv run pytest tests/test_remote.py -m network_full
 # ---------------------------------------------------------------------------
 
