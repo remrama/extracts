@@ -245,14 +245,20 @@ def fetch_barrett2020(
     process: bool = True,
     **kwargs: Any,
 ) -> pd.DataFrame:
-    """Barrett, 2020, *Dreaming* — Dreams about COVID-19 versus normative dreams.
-
-    doi: `10.1037/drm0000149 <https://doi.org/10.1037/drm0000149>`_
+    """Barrett, 2020, *Dreaming*,
+    Dreams about COVID-19 versus normative dreams: Trends by gender,
+    doi:`10.1037/drm0000149 <https://doi.org/10.1037/drm0000149>`_
 
     Table captions
     --------------
-    * **Table 1:** Female Pandemic Survey Dreams vs. Hall and Van de Castle Female Normative Dreams.
-    * **Table 2:** Male Pandemic Survey Dreams vs. Hall and Van de Castle Male Normative Dreams.
+    * **Table 1:** Female Pandemic Survey Dreams Versus Hall and Van de Castle Female
+      Normative Dreams.
+    * **Table 2:** Male Pandemic Survey Dreams Versus Hall and Van de Castle Male Normative Dreams.
+
+    Notes
+    -----
+    Table 2 has "male" in the column names, but Table 1 does not have "female"
+    in the same respective location. Note that Table 1 is female-only values.
 
     Parameters
     ----------
@@ -287,11 +293,14 @@ def fetch_cariola2010(
     process: bool = True,
     **kwargs: Any,
 ) -> pd.DataFrame:
-    """Cariola, 2010, *unpublished paper* — Latent linguistic structure of oral dream narratives.
+    """Cariola, 2010, *unpublished paper*,
+    Assessing the latent linguistic structure of oral dream narratives,
+    url:`<https://www.research.ed.ac.uk/en/publications/assessing-the-latent-linguistic-structure-of-oral-dream-narrative>`_
 
     Table captions
     --------------
-    * **Table 1:** Descriptive statistics of linguistic variables in oral dream narratives.
+    * **Table 1:** Descriptive statistics of linguistic variables in orally elicited
+      dream narratives.
     """
     pup = _create_pup("cariola2010", version or "latest")
 
@@ -314,14 +323,17 @@ def fetch_cariola2014(
     process: bool = True,
     **kwargs: Any,
 ) -> pd.DataFrame:
-    """Cariola, 2014, *Imagin Cogn Pers* — Lexical tendencies of barrier personalities.
-
-    doi: `10.2190/IC.34.2.d <https://doi.org/10.2190/IC.34.2.d>`_
+    """Cariola, 2014, *Imagin Cogn Pers*,
+    Lexical tendencies of high and low barrier personalities in narratives of everyday and
+    dream memories,
+    doi:`10.2190/IC.34.2.d <https://doi.org/10.2190/IC.34.2.d>`_
 
     Table captions
     --------------
-    * **Table 1:** Univariate Results for Low and High Barrier Personalities (Everyday Memories).
-    * **Table 2:** Univariate Results for Low and High Barrier Personalities (Dream Memories).
+    * **Table 1:** Univariate Results of Body Boundary Imagery and LIWC Linguistic Variables of
+      Low and High Barrier Personalities in Narratives of Everyday Memories.
+    * **Table 2:** Univariate Results of Body Boundary Imagery and LIWC Linguistic Variables of
+      Low and High Barrier Personalities in Narratives of Dream Memories.
     """
     pup = _create_pup("cariola2014", version or "latest")
 
@@ -344,13 +356,21 @@ def fetch_hawkins2017(
     process: bool = True,
     **kwargs: Any,
 ) -> pd.DataFrame:
-    """Hawkins II & Boyd, 2017, *Dreaming* — Dream language, LIWC norms, and personality.
-
-    doi: `10.1037/drm0000049 <https://doi.org/10.1037/drm0000049>`_
+    """Hawkins II & Boyd, 2017, *Dreaming*,
+    Such stuff as dreams are made on: Dream language, LIWC norms, and personality correlates,
+    Dreams about COVID-19 versus normative dreams: Trends by gender,
+    doi:`10.1037/drm0000049 <https://doi.org/10.1037/drm0000049>`_
 
     Table captions
     --------------
-    * **Table 1:** Means and SDs for the LIWC (2007) Linguistic Features of Dreams (Studies 1-3).
+    * **Table 1:** Means and Standard Deviations (SDs) for the LIWC (2007) Linguistic Features
+      of Dreams From Studies 1 to 3.
+
+    Notes
+    -----
+    2007 Norms are a subset of the norms published in the LIWC2007 manual.
+
+    Ave. recent dream is UNWEIGHTED.
     """
     pup = _create_pup("hawkins2017", version or "latest")
 
@@ -373,9 +393,9 @@ def fetch_mariani2023(
     process: bool = True,
     **kwargs: Any,
 ) -> pd.DataFrame:
-    """Mariani et al., 2023, *Psychoanal Psychol* — Referential processes in COVID-19 dreams.
-
-    doi: `10.1037/pap0000420 <https://doi.org/10.1037/pap0000420>`_
+    """Mariani et al., 2023, *Psychoanal Psychol*,
+    Referential processes in dreams: A brief report from a COVID-19 dreams analysis,
+    doi:`10.1037/pap0000420 <https://doi.org/10.1037/pap0000420>`_
 
     Table captions
     --------------
@@ -402,14 +422,15 @@ def fetch_mcnamara2015(
     process: bool = True,
     **kwargs: Any,
 ) -> pd.DataFrame:
-    """McNamara et al., 2015, *Dreaming* — Aggression in nightmares and unpleasant dreams.
-
-    doi: `10.1037/a0039273 <https://doi.org/10.1037/a0039273>`_
+    """McNamara et al., 2015, *Dreaming*,
+    Aggression in nightmares and unpleasant dreams and in people reporting recurrent nightmares,
+    doi:`10.1037/a0039273 <https://doi.org/10.1037/a0039273>`_
 
     Table captions
     --------------
     * **Table 1:** LIWC and Content Scale Means and SDs Across All Types of Dreams With LIWC Norms.
-    * **Table 6:** Categorical Comparisons Between Nightmares That Woke A Dreamer Up vs Not.
+    * **Table 6:** Categorical Comparisons Between Nightmares That Woke A Dreamer Up to
+      Nightmares Where the Dreamer Was Not Woken Up.
     """
     pup = _create_pup("mcnamara2015", version or "latest")
 
@@ -432,9 +453,10 @@ def fetch_meador2022(
     process: bool = True,
     **kwargs: Any,
 ) -> pd.DataFrame:
-    """Meador et al., 2022, *Appl Cognit Psychol* — Change in symptoms and language.
-
-    doi: `10.1002/acp.3976 <https://doi.org/10.1002/acp.3976>`_
+    """Meador et al., 2022, *Appl Cognit Psychol*,
+    Lexical tendencies of high and low barrier personalities in narratives of everyday and
+    dream memories,
+    doi:`10.1002/acp.3976 <https://doi.org/10.1002/acp.3976>`_
 
     Table captions
     --------------
@@ -461,9 +483,11 @@ def fetch_niederhoffer2017(
     process: bool = True,
     **kwargs: Any,
 ) -> pd.DataFrame:
-    """Niederhoffer et al., 2017, *CLPsych* — Language and psychological features of dreams.
+    """Niederhoffer et al., 2017, *CLPsych*,
+    In your wildest dreams: the language and psychological features of dreams
+    doi:`10.18653/v1/W17-3102 <https://doi.org/10.18653/v1/W17-3102>`_
 
-    doi: `10.18653/v1/W17-3102 <https://doi.org/10.18653/v1/W17-3102>`_
+    PDF available at https://aclanthology.org/W17-3102.pdf
 
     Table captions
     --------------
@@ -475,7 +499,8 @@ def fetch_niederhoffer2017(
 
     Notes
     -----
-    A typo in Table 2 was corrected upstream (``plave`` -> ``plane``).
+    I corrected a typo in Table 2 (``plave`` -> ``plane``).
+    The correct spelling is "plane", as you can see it in the corresponding Topic in Appendix A.
     """
     pup = _create_pup("niederhoffer2017", version or "latest")
     read_kwargs: dict[str, Any]
@@ -507,9 +532,10 @@ def fetch_paquet2020(
     process: bool = True,
     **kwargs: Any,
 ) -> pd.DataFrame:
-    """Paquet et al., 2020, *Dreaming* — Quantitative text analysis of posttrauma nightmares.
-
-    doi: `10.1037/drm0000128 <https://doi.org/10.1037/drm0000128>`_
+    """Paquet et al., 2020, *Dreaming*,
+    A quantitative text analysis approach to describing posttrauma nightmares in a
+    treatment-seeking population,
+    doi:`10.1037/drm0000128 <https://doi.org/10.1037/drm0000128>`_
 
     Table captions
     --------------
