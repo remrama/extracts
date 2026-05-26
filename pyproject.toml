@@ -1,5 +1,5 @@
 [build-system]
-requires = ["setuptools>=61.0", "wheel", "setuptools_scm>=8"]
+requires = ["setuptools>=80.0", "wheel"]
 build-backend = "setuptools.build_meta"
 
 [project]
@@ -12,37 +12,44 @@ authors = [
 maintainers = [
   {name = "Remington Mallett", email = "mallett.remy@gmail.com"},
 ]
-requires-python = ">=3.8"
+requires-python = ">=3.13"
 dependencies = [
-  "pandas>=2.0",
+  "pandas>=2.2.3",
   "pooch>=1.8",
+  "pyarrow>=19.0",
 ]
-readme = "README.rst"
+readme = "README.md"
 keywords = ["data", "meta-analysis"]
 classifiers = [
-  "Development Status :: 1 - Planning",
-  "License :: OSI Approved :: BSD License",
+  "Development Status :: 3 - Alpha",
+  "License :: OSI Approved :: MIT License",
   "Operating System :: OS Independent",
   "Intended Audience :: Science/Research",
   "Topic :: Scientific/Engineering",
   "Programming Language :: Python",
   "Programming Language :: Python :: 3",
-  "Programming Language :: Python :: 3.7",
-  "Programming Language :: Python :: 3.8",
-  "Programming Language :: Python :: 3.9",
-  "Programming Language :: Python :: 3.10",
-  "Programming Language :: Python :: 3.11",
-  "Programming Language :: Python :: 3.12",
   "Programming Language :: Python :: 3.13",
-]
-
-[project.optional-dependencies]
-dev = [
-  "tabula-py>=2.9",
+  "Programming Language :: Python :: 3.14",
 ]
 
 [project.urls]
 Homepage = "https://github.com/remrama/extracts"
+Documentation = "https://remrama.github.io/extracts"
+
+[project.optional-dependencies]
+dev = [
+  "mypy>=1.12",
+  "myst-nb>=1.1",
+  "pre-commit>=3.0",
+  "pytest>=8.0",
+  "pytest-cov>=6.0",
+  "ruff>=0.6",
+  "sphinx>=7.0",
+  "sphinx-book-theme>=1.1",
+]
+
+[tool.setuptools.dynamic]
+version = {attr = "extracts.__version__"}
 
 [tool.setuptools]
 include-package-data = true
@@ -51,10 +58,41 @@ include-package-data = true
 namespaces = false
 where = ["src"]
 
-[tool.setuptools.package-data]
-extracts = ["extracts/data/registry.txt"]
+[tool.mypy]
+files = ["src/"]
+python_version = "3.13"
+ignore_missing_imports = true
+strict = true
 
-[tool.setuptools_scm]
-version_scheme = "python-simplified-semver"
-local_scheme = "no-local-version"
-version_file = "src/extracts/_version.py"
+[tool.pytest.ini_options]
+addopts = "--cov=extracts --cov-report=term-missing --doctest-modules -m 'not network and not network_full'"
+testpaths = ["tests", "src"]
+markers = [
+  "network: tests that hit the network (skipped by default; opt in with -m network).",
+  "network_full: exhaustive remote tests over every registered table (slow; opt in with -m network_full).",
+]
+
+[tool.ruff]
+line-length = 100
+target-version = "py313"
+
+[tool.ruff.lint]
+select = ["E", "F", "I", "W", "C90", "UP", "NPY201", "D"]
+
+[tool.ruff.lint.mccabe]
+max-complexity = 10
+
+[tool.ruff.lint.per-file-ignores]
+"__init__.py" = ["F401", "F403", "D104"]
+"tests/*" = ["D100", "D101", "D102", "D103", "D104"]
+"docs/scripts/*" = ["D100", "D103"]
+
+[tool.ruff.lint.pydocstyle]
+convention = "numpy"
+
+[tool.ruff.format]
+docstring-code-format = true
+docstring-code-line-length = 88
+indent-style = "space"
+line-ending = "lf"
+quote-style = "double"
